@@ -1,150 +1,82 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-
-:root {
-    --background-color-light: #f0f2f5;
-    --text-color-light: #333;
-    --container-bg-light: white;
-    --button-bg-light: #4CAF50;
-    --button-text-light: white;
-    --lotto-number-shadow-light: rgba(0, 0, 0, 0.2);
-    --container-shadow-light: rgba(0, 0, 0, 0.1);
-    --button-shadow-light: rgba(76, 175, 80, 0.4);
-
-    --background-color-dark: #2c2c2c;
-    --text-color-dark: #f1f1f1;
-    --container-bg-dark: #3e3e3e;
-    --button-bg-dark: #5cb85c;
-    --button-text-dark: white;
-    --lotto-number-shadow-dark: rgba(255, 255, 255, 0.2);
-    --container-shadow-dark: rgba(255, 255, 255, 0.1);
-    --button-shadow-dark: rgba(92, 184, 92, 0.4);
-}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 
 body {
-    font-family: 'Nanum Gothic', sans-serif;
-    background-color: var(--background-color-light);
-    color: var(--text-color-light);
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-body.dark-mode {
-    background-color: var(--background-color-dark);
-    color: var(--text-color-dark);
 }
 
 .container {
-    text-align: center;
-    background: var(--container-bg-light);
+    background: white;
     padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px var(--container-shadow-light);
-    transition: background-color 0.3s, box-shadow 0.3s;
-    position: relative;
-}
-
-body.dark-mode .container {
-    background: var(--container-bg-dark);
-    box-shadow: 0 10px 30px var(--container-shadow-dark);
-}
-
-.toolbar {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    display: flex;
-    gap: 8px;
-}
-
-.theme-btn {
-    background: none;
-    border: 1px solid var(--text-color-light);
-    color: var(--text-color-light);
-    padding: 8px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-body.dark-mode .theme-btn {
-    border-color: var(--text-color-dark);
-    color: var(--text-color-dark);
-}
-
-.theme-btn:hover {
-    background-color: var(--text-color-light);
-    color: var(--background-color-light);
-}
-
-body.dark-mode .theme-btn:hover {
-    background-color: var(--text-color-dark);
-    color: var(--background-color-dark);
-}
-
-.theme-btn.active {
-    background-color: var(--text-color-light);
-    color: var(--background-color-light);
-}
-
-body.dark-mode .theme-btn.active {
-    background-color: var(--text-color-dark);
-    color: var(--background-color-dark);
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
 }
 
 h1 {
+    color: #2c3e50;
     margin-bottom: 30px;
 }
 
-.lotto-numbers {
+.selection-wrapper {
     display: flex;
-    justify-content: center;
     gap: 15px;
     margin-bottom: 30px;
 }
 
-.lotto-number {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#hairstyle-select {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#recommend-btn {
+    padding: 12px 25px;
+    background-color: #3498db;
     color: white;
-    font-size: 24px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px var(--lotto-number-shadow-light);
-    transition: transform 0.3s ease, background-color 0.3s;
-}
-
-body.dark-mode .lotto-number {
-    box-shadow: 0 4px 10px var(--lotto-number-shadow-dark);
-}
-
-.lotto-number:hover {
-    transform: scale(1.1);
-}
-
-#generate-btn {
-    background-color: var(--button-bg-light);
-    color: var(--button-text-light);
     border: none;
-    padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px var(--button-shadow-light);
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-body.dark-mode #generate-btn {
-    background-color: var(--button-bg-dark);
-    box-shadow: 0 4px 15px var(--button-shadow-dark);
+#recommend-btn:hover {
+    background-color: #2980b9;
 }
 
-#generate-btn:hover {
-    opacity: 0.9;
+.recommendation-wrapper {
+    text-align: left;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+}
+
+.product {
+    margin-bottom: 25px;
+}
+
+.product h2 {
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.product p {
+    line-height: 1.6;
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
 }
