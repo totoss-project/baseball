@@ -1,29 +1,86 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 
+:root {
+    --bg-color-light: #f4f7f6;
+    --text-color-light: #333;
+    --container-bg-light: white;
+    --header-color-light: #2c3e50;
+    --button-bg-light: #3498db;
+    --button-text-light: white;
+    --select-border-light: #ddd;
+
+    --bg-color-dark: #2c3e50;
+    --text-color-dark: #ecf0f1;
+    --container-bg-dark: #34495e;
+    --header-color-dark: #ecf0f1;
+    --button-bg-dark: #5dade2;
+    --button-text-dark: #2c3e50;
+    --select-border-dark: #5dade2;
+}
+
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
 }
 
 .container {
-    background: white;
+    background: var(--container-bg-light);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 90%;
     max-width: 600px;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode .container {
+    background: var(--container-bg-dark);
+}
+
+.toolbar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.theme-btn {
+    padding: 8px 12px;
+    background-color: var(--button-bg-light);
+    color: var(--button-text-light);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode .theme-btn {
+    background-color: var(--button-bg-dark);
+    color: var(--button-text-dark);
 }
 
 h1 {
-    color: #2c3e50;
+    color: var(--header-color-light);
     margin-bottom: 30px;
+    transition: color 0.3s;
+}
+
+body.dark-mode h1 {
+    color: var(--header-color-dark);
 }
 
 .selection-wrapper {
@@ -35,15 +92,24 @@ h1 {
 #hairstyle-select {
     flex-grow: 1;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--select-border-light);
     border-radius: 5px;
     font-size: 16px;
+    background-color: var(--container-bg-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body.dark-mode #hairstyle-select {
+    background-color: var(--container-bg-dark);
+    color: var(--text-color-dark);
+    border-color: var(--select-border-dark);
 }
 
 #recommend-btn {
     padding: 12px 25px;
-    background-color: #3498db;
-    color: white;
+    background-color: var(--button-bg-light);
+    color: var(--button-text-light);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -52,13 +118,22 @@ h1 {
 }
 
 #recommend-btn:hover {
-    background-color: #2980b9;
+    opacity: 0.9;
+}
+
+body.dark-mode #recommend-btn {
+    background-color: var(--button-bg-dark);
+    color: var(--button-text-dark);
 }
 
 .recommendation-wrapper {
     text-align: left;
     border-top: 1px solid #eee;
     padding-top: 30px;
+}
+
+body.dark-mode .recommendation-wrapper {
+    border-top-color: #444;
 }
 
 .product {
@@ -68,6 +143,10 @@ h1 {
 .product h2 {
     color: #3498db;
     margin-bottom: 10px;
+}
+
+body.dark-mode .product h2 {
+    color: var(--button-bg-dark);
 }
 
 .product p {

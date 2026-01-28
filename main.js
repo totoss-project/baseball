@@ -1,3 +1,32 @@
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+
+// 테마 설정 함수
+function setTheme(theme) {
+    if (theme === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggle.textContent = '라이트 모드';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        body.classList.remove('dark-mode');
+        themeToggle.textContent = '다크 모드';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// 테마 토글 버튼 이벤트 리스너
+themeToggle.addEventListener('click', () => {
+    const isDarkMode = body.classList.contains('dark-mode');
+    setTheme(isDarkMode ? 'light' : 'dark');
+});
+
+// 페이지 로드 시 저장된 테마 적용
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+});
+
+
 const hairstyleSelect = document.getElementById('hairstyle-select');
 const recommendBtn = document.getElementById('recommend-btn');
 const productRecommendationDiv = document.getElementById('product-recommendation');
