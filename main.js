@@ -1,26 +1,27 @@
 const lottoNumbersDiv = document.getElementById('lotto-numbers');
 const generateBtn = document.getElementById('generate-btn');
-const themeToggle = document.getElementById('theme-toggle');
+const lightModeBtn = document.getElementById('light-mode-btn');
+const darkModeBtn = document.getElementById('dark-mode-btn');
 const body = document.body;
 
 // 테마 설정 함수
 function setTheme(theme) {
     if (theme === 'dark') {
         body.classList.add('dark-mode');
-        themeToggle.textContent = '라이트 모드';
+        darkModeBtn.classList.add('active');
+        lightModeBtn.classList.remove('active');
         localStorage.setItem('theme', 'dark');
     } else {
         body.classList.remove('dark-mode');
-        themeToggle.textContent = '다크 모드';
+        lightModeBtn.classList.add('active');
+        darkModeBtn.classList.remove('active');
         localStorage.setItem('theme', 'light');
     }
 }
 
-// 테마 토글 버튼 이벤트 리스너
-themeToggle.addEventListener('click', () => {
-    const isDarkMode = body.classList.contains('dark-mode');
-    setTheme(isDarkMode ? 'light' : 'dark');
-});
+// 테마 버튼 이벤트 리스너
+lightModeBtn.addEventListener('click', () => setTheme('light'));
+darkModeBtn.addEventListener('click', () => setTheme('dark'));
 
 // 페이지 로드 시 저장된 테마 적용
 document.addEventListener('DOMContentLoaded', () => {
