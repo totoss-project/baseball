@@ -1,25 +1,89 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
+:root {
+    --background-color-light: #f0f2f5;
+    --text-color-light: #333;
+    --container-bg-light: white;
+    --button-bg-light: #4CAF50;
+    --button-text-light: white;
+    --lotto-number-shadow-light: rgba(0, 0, 0, 0.2);
+    --container-shadow-light: rgba(0, 0, 0, 0.1);
+    --button-shadow-light: rgba(76, 175, 80, 0.4);
+
+    --background-color-dark: #2c2c2c;
+    --text-color-dark: #f1f1f1;
+    --container-bg-dark: #3e3e3e;
+    --button-bg-dark: #5cb85c;
+    --button-text-dark: white;
+    --lotto-number-shadow-dark: rgba(255, 255, 255, 0.2);
+    --container-shadow-dark: rgba(255, 255, 255, 0.1);
+    --button-shadow-dark: rgba(92, 184, 92, 0.4);
+}
+
 body {
     font-family: 'Nanum Gothic', sans-serif;
-    background-color: #f0f2f5;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
 }
 
 .container {
     text-align: center;
-    background: white;
+    background: var(--container-bg-light);
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px var(--container-shadow-light);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+body.dark-mode .container {
+    background: var(--container-bg-dark);
+    box-shadow: 0 10px 30px var(--container-shadow-dark);
+}
+
+.toolbar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.theme-toggle {
+    background: none;
+    border: 1px solid var(--text-color-light);
+    color: var(--text-color-light);
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode .theme-toggle {
+    border-color: var(--text-color-dark);
+    color: var(--text-color-dark);
+}
+
+.theme-toggle:hover {
+    background-color: var(--text-color-light);
+    color: var(--background-color-light);
+}
+
+body.dark-mode .theme-toggle:hover {
+    background-color: var(--text-color-dark);
+    color: var(--background-color-dark);
 }
 
 h1 {
-    color: #333;
     margin-bottom: 30px;
 }
 
@@ -40,8 +104,12 @@ h1 {
     color: white;
     font-size: 24px;
     font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 10px var(--lotto-number-shadow-light);
+    transition: transform 0.3s ease, background-color 0.3s;
+}
+
+body.dark-mode .lotto-number {
+    box-shadow: 0 4px 10px var(--lotto-number-shadow-dark);
 }
 
 .lotto-number:hover {
@@ -49,18 +117,22 @@ h1 {
 }
 
 #generate-btn {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--button-bg-light);
+    color: var(--button-text-light);
     border: none;
     padding: 15px 30px;
     font-size: 18px;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    box-shadow: 0 4px 15px var(--button-shadow-light);
+}
+
+body.dark-mode #generate-btn {
+    background-color: var(--button-bg-dark);
+    box-shadow: 0 4px 15px var(--button-shadow-dark);
 }
 
 #generate-btn:hover {
-    background-color: #45a049;
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+    opacity: 0.9;
 }
