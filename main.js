@@ -22,7 +22,7 @@ themeToggle.addEventListener('click', () => {
 
 // 페이지 로드 시 저장된 테마 적용
 document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(savedTheme);
 });
 
