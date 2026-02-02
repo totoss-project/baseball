@@ -1,31 +1,491 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>남자 헤어스타일별 헤어제품 추천</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Number Baseball Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-hover: #2563eb;
+            --strike-color: #10b981;
+            /* Green */
+            --ball-color: #f59e0b;
+            /* Amber */
+            --out-color: #ef4444;
+            /* Red */
+            --input-bg: #334155;
+            --border-color: #475569;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .game-container {
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 480px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background element */
+        .game-container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--accent-primary), transparent);
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(40px);
+            z-index: 0;
+        }
+
+        header {
+            text-align: center;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .game-status {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .game-status.win {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.4);
+            color: #34d399;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            z-index: 1;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background-color: var(--input-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 1.25rem;
+            color: white;
+            text-align: center;
+            letter-spacing: 0.5rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent-primary);
+        }
+
+        input[type="text"]::placeholder {
+            color: #64748b;
+            font-size: 1rem;
+            letter-spacing: normal;
+        }
+
+        button {
+            padding: 0 1.5rem;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        #guess-btn {
+            background-color: var(--accent-primary);
+            color: white;
+        }
+
+        #guess-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        #guess-btn:active {
+            transform: scale(0.96);
+        }
+
+        #restart-btn {
+            background-color: var(--strike-color);
+            color: white;
+            display: none;
+            /* Hidden by default */
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        #restart-btn:hover {
+            background-color: #059669;
+            /* Darker green */
+            transform: translateY(-2px);
+        }
+
+        .history-container {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 300px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        /* Custom Scrollbar for Webkit */
+        .history-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .history-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .history-container::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 10px;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.02);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            animation: slideIn 0.3s ease-out;
+            border-left: 4px solid transparent;
+        }
+
+        .history-item.strike-high {
+            border-left-color: var(--strike-color);
+        }
+
+        .history-item.ball-high {
+            border-left-color: var(--ball-color);
+        }
+
+        .history-item.out-high {
+            border-left-color: var(--out-color);
+        }
+
+        .guess-number {
+            font-family: monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            color: var(--text-primary);
+        }
+
+        .result-badges {
+            display: flex;
+            gap: 8px;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .badge-strike {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--strike-color);
+        }
+
+        .badge-ball {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--ball-color);
+        }
+
+        .badge-out {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--out-color);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .toast {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background-color: #f87171;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            z-index: 100;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="toolbar">
-            <button id="theme-toggle" class="theme-btn">테마 전환</button>
+
+    <div class="toast" id="toast">Invalid Input</div>
+
+    <div class="game-container">
+        <header>
+            <h1>Number Baseball</h1>
+            <p class="subtitle">Guess the 3 unique digits (0-9)</p>
+        </header>
+
+        <div class="game-status" id="game-status">
+            Game Started! Make your first guess.
         </div>
-        <h1>남자 헤어스타일별 헤어제품 추천</h1>
-        <div class="selection-wrapper">
-            <select id="hairstyle-select">
-                <option value="">헤어스타일을 선택하세요</option>
-                <option value="slick-back">슬릭백</option>
-                <option value="pomade">포마드</option>
-                <option value="shadow-perm">쉐도우펌</option>
-                <option value="dandy-cut">댄디컷</option>
-            </select>
-            <button id="recommend-btn">추천 받기</button>
+
+        <div class="input-area">
+            <input type="text" id="guess-input" maxlength="3" placeholder="123" inputmode="numeric" autocomplete="off">
+            <button id="guess-btn">Guess</button>
+            <button id="restart-btn">Restart</button>
         </div>
-        <div id="product-recommendation" class="recommendation-wrapper">
-            <!-- 추천 제품 정보가 여기에 표시됩니다. -->
+
+        <div class="history-container" id="history-list">
+            <!-- History items will appear here -->
         </div>
     </div>
-    <script src="main.js"></script>
+
+    <script>
+        // Game State
+        let secretCode = [];
+        let isGameOver = false;
+
+        // DOM Elements
+        const guessInput = document.getElementById('guess-input');
+        const guessBtn = document.getElementById('guess-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const historyList = document.getElementById('history-list');
+        const gameStatus = document.getElementById('game-status');
+        const toast = document.getElementById('toast');
+
+        // Functions
+        function generateSecretCode() {
+            const digits = Array.from({ length: 10 }, (_, i) => i); // [0, 1, ... 9]
+            const code = [];
+            for (let i = 0; i < 3; i++) {
+                const randomIndex = Math.floor(Math.random() * digits.length);
+                code.push(digits[randomIndex]);
+                digits.splice(randomIndex, 1); // Remove used digit
+            }
+            console.log('Secret (for testing):', code.join('')); // Ease of testing for dev
+            return code;
+        }
+
+        function isValidGuess(val) {
+            // Check if 3 chars, is numbers
+            if (!/^\d{3}$/.test(val)) return { valid: false, msg: "Please enter 3 digits." };
+
+            // Check unique digits
+            const unique = new Set(val.split(''));
+            if (unique.size !== 3) return { valid: false, msg: "Digits must be unique." };
+
+            return { valid: true };
+        }
+
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function calculateResult(guessStr) {
+            const guessArr = guessStr.split('').map(Number);
+            let strikes = 0;
+            let balls = 0;
+
+            for (let i = 0; i < 3; i++) {
+                if (guessArr[i] === secretCode[i]) {
+                    strikes++;
+                } else if (secretCode.includes(guessArr[i])) {
+                    balls++;
+                }
+            }
+
+            return { strikes, balls, isOut: strikes === 0 && balls === 0 };
+        }
+
+        function addHistoryItem(guess, result) {
+            const item = document.createElement('div');
+            item.className = 'history-item';
+
+            // Determine border color class
+            if (result.strikes === 3) item.classList.add('strike-high'); // Win color reused
+            else if (result.isOut) item.classList.add('out-high');
+            else if (result.strikes > 0) item.classList.add('strike-high');
+            else item.classList.add('ball-high');
+
+            // Badges HTML
+            let badgesHtml = '';
+            if (result.isOut) {
+                badgesHtml = `<span class="badge badge-out">OUT</span>`;
+            } else {
+                if (result.strikes > 0) badgesHtml += `<span class="badge badge-strike">${result.strikes} S</span>`;
+                if (result.balls > 0) badgesHtml += `<span class="badge badge-ball">${result.balls} B</span>`;
+            }
+
+            item.innerHTML = `
+                <span class="guess-number">${guess}</span>
+                <div class="result-badges">${badgesHtml}</div>
+            `;
+
+            // Insert at the top
+            historyList.insertBefore(item, historyList.firstChild);
+        }
+
+        function endGame(win) {
+            isGameOver = true;
+            guessInput.disabled = true;
+            guessBtn.style.display = 'none';
+            restartBtn.style.display = 'block';
+
+            if (win) {
+                gameStatus.textContent = "🎉 HOMERUN! You Win!";
+                gameStatus.classList.add('win');
+            } else {
+                // Not technically reachable with current logic (unlimited guesses), but good to have
+                gameStatus.textContent = "Game Over.";
+            }
+        }
+
+        function handleGuess() {
+            if (isGameOver) return;
+
+            const val = guessInput.value;
+            const validation = isValidGuess(val);
+
+            if (!validation.valid) {
+                showToast(validation.msg);
+                shakeInput();
+                return;
+            }
+
+            const result = calculateResult(val);
+            addHistoryItem(val, result);
+
+            if (result.strikes === 3) {
+                endGame(true);
+            } else {
+                gameStatus.textContent = `${result.strikes} Strike, ${result.balls} Ball`;
+                guessInput.value = '';
+                guessInput.focus();
+            }
+        }
+
+        function shakeInput() {
+            guessInput.style.transform = "translateX(5px)";
+            setTimeout(() => {
+                guessInput.style.transform = "translateX(-5px)";
+                setTimeout(() => {
+                    guessInput.style.transform = "none";
+                }, 100);
+            }, 100);
+        }
+
+        function initGame() {
+            secretCode = generateSecretCode();
+            isGameOver = false;
+            guessInput.disabled = false;
+            guessInput.value = '';
+            historyList.innerHTML = '';
+            gameStatus.textContent = "Game Started! Make your first guess.";
+            gameStatus.classList.remove('win');
+
+            guessBtn.style.display = 'block';
+            restartBtn.style.display = 'none';
+            guessInput.focus();
+        }
+
+        // Event Listeners
+        guessBtn.addEventListener('click', handleGuess);
+        restartBtn.addEventListener('click', initGame);
+
+        guessInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleGuess();
+        });
+
+        // Initialize
+        initGame();
+
+    </script>
 </body>
+
 </html>
