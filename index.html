@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number Baseball Game</title>
+    <title>숫자 야구 게임</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -389,17 +389,17 @@
 
 <body>
 
-    <div class="toast" id="toast">Invalid Input</div>
+    <div class="toast" id="toast">잘못된 입력입니다</div>
 
     <div class="page-wrapper">
         <div class="game-container">
             <header>
-                <h1>Number Baseball</h1>
-                <p class="subtitle">Guess the 3 unique digits (0-9)</p>
+                <h1>숫자 야구</h1>
+                <p class="subtitle">겹치지 않는 3자리 숫자 (0-9)를 맞춰보세요</p>
             </header>
 
             <div class="game-status" id="game-status">
-                Game Started! Make your first guess.
+                게임 시작! 첫 번째 추측을 해보세요.
             </div>
 
             <div class="input-area">
@@ -484,9 +484,9 @@
         }
 
         function isValidGuess(val) {
-            if (!/^\d{3}$/.test(val)) return { valid: false, msg: "Please enter 3 digits." };
+            if (!/^\d{3}$/.test(val)) return { valid: false, msg: "3자리 숫자를 입력해주세요." };
             const unique = new Set(val.split(''));
-            if (unique.size !== 3) return { valid: false, msg: "Digits must be unique." };
+            if (unique.size !== 3) return { valid: false, msg: "숫자는 중복될 수 없습니다." };
             return { valid: true };
         }
 
@@ -525,7 +525,7 @@
 
             let badgesHtml = '';
             if (result.isOut) {
-                badgesHtml = `<span class="badge badge-out">OUT</span>`;
+                badgesHtml = `<span class="badge badge-out">아웃</span>`;
             } else {
                 if (result.strikes > 0) badgesHtml += `<span class="badge badge-strike">${result.strikes} S</span>`;
                 if (result.balls > 0) badgesHtml += `<span class="badge badge-ball">${result.balls} B</span>`;
@@ -558,10 +558,10 @@
             restartBtn.style.display = 'block';
 
             if (win) {
-                gameStatus.textContent = "🎉 HOMERUN! You Win!";
+                gameStatus.textContent = "🎉 홈런! 승리했습니다!";
                 gameStatus.classList.add('win');
             } else {
-                gameStatus.textContent = "Game Over. The number was " + secretCode.join('');
+                gameStatus.textContent = "게임 종료. 정답은 " + secretCode.join('') + "였습니다.";
             }
         }
 
@@ -584,7 +584,11 @@
             if (result.strikes === 3) {
                 endGame(true);
             } else {
-                gameStatus.textContent = `${result.strikes} Strike, ${result.balls} Ball`;
+                if (result.isOut) {
+                    gameStatus.textContent = '아웃';
+                } else {
+                    gameStatus.textContent = `${result.strikes} 스트라이크, ${result.balls} 볼`;
+                }
                 guessInput.value = '';
                 guessInput.focus();
             }
@@ -606,7 +610,7 @@
             guessInput.disabled = false;
             guessInput.value = '';
             historyList.innerHTML = '';
-            gameStatus.textContent = "Game Started! Make your first guess.";
+            gameStatus.textContent = "게임을 시작합니다! 첫 번째 숫자를 맞춰보세요.";
             gameStatus.classList.remove('win');
             
             renderEliminatedNumbers();
