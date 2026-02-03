@@ -21,7 +21,7 @@ body {
 }
 
 .game-container {
-    background-color: var(--card-bg); /* Use card background from global style */
+    background-color: #000000; /* Explicitly dark background */
     border-radius: 24px;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
     width: 100%;
@@ -112,5 +112,6 @@ body {
 
 .rankings-content a:hover {
     background-color: var(--accent-primary);
-    color: white;
+    color: var(--strike-color); /* Emphasized color on hover */
+    font-weight: 700; /* Emphasized text on hover */
 }

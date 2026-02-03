@@ -161,3 +161,24 @@ body.dark-mode .product h2 {
     border-radius: 8px;
     margin-top: 15px;
 }
+
+/* Ranking page specific styles */
+#ranking-list ol {
+    list-style: none;
+    padding: 0;
+}
+
+#ranking-list li {
+    background: var(--container-bg-light);
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode #ranking-list li {
+    background: var(--container-bg-dark);
+}
