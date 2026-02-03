@@ -32,7 +32,12 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-color);
+            background-image: url('https://images.unsplash.com/photo-1547820546-59a85d3f2b4e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Make the background fixed */
+            background-color: var(--bg-color); /* Still used for blend mode */
+            background-blend-mode: overlay; /* Blend with the background-color */
             color: var(--text-primary);
             display: flex;
             justify-content: center;
