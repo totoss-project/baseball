@@ -11,7 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
         recordSpan.textContent = formattedTime;
     }
 
-    saveRankBtn.addEventListener('click', () => {
+    saveRankBtn.addEventListener('click', saveRank);
+
+    playerNameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            saveRank();
+        }
+    });
+
+    function saveRank() {
         const name = playerNameInput.value.trim();
         if (name && time) {
             const newRank = { name, time: parseInt(time) };
@@ -27,5 +35,5 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (!name) {
             alert('이름을 입력해주세요!');
         }
-    });
+    }
 });
