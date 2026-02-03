@@ -65,7 +65,7 @@ body {
     background-color: var(--input-bg); /* Use a darker background for consistency */
     border-radius: 12px;
     font-size: 0.95rem; /* Consistent with index.html subtitles */
-    color: var(--text-secondary); /* Consistent with index.html subtitles */
+    color: var(--text-primary); /* Use primary text color for visibility */
     transition: all 0.2s ease-in-out; /* Smooth transition for emphasis */
 }
 
@@ -106,7 +106,7 @@ body {
 }
 
 .no-rankings {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-size: 0.95rem; /* Consistent with index.html subtitles */
     padding: 1rem;
 }
