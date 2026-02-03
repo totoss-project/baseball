@@ -1,0 +1,116 @@
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color); /* Use dark background from global style */
+    color: var(--text-primary); /* Use primary text color from global style */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    margin: 0;
+}
+
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+}
+
+.game-container {
+    background-color: var(--card-bg); /* Use card background from global style */
+    border-radius: 24px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.rankings-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.rankings-content h1 {
+    font-size: 2rem; /* Smaller title size */
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, #60a5fa, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+#ranking-list {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.ranking-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--input-bg); /* Use a darker background for consistency */
+    border-radius: 12px;
+    font-size: 0.95rem; /* Consistent with index.html subtitles */
+    color: var(--text-secondary); /* Consistent with index.html subtitles */
+}
+
+.ranking-item:nth-child(1) {
+    background-color: rgba(255, 215, 0, 0.15); /* Gold for 1st place */
+    color: #ffd700;
+}
+
+.ranking-item:nth-child(2) {
+    background-color: rgba(192, 192, 192, 0.15); /* Silver for 2nd place */
+    color: #c0c0c0;
+}
+
+.ranking-item:nth-child(3) {
+    background-color: rgba(205, 127, 50, 0.15); /* Bronze for 3rd place */
+    color: #cd7f32;
+}
+
+.ranking-item span:first-child {
+    font-weight: 600;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.ranking-item span:last-child {
+    font-weight: 700;
+    color: var(--accent-primary);
+}
+
+.no-rankings {
+    color: var(--text-secondary);
+    font-size: 0.95rem; /* Consistent with index.html subtitles */
+    padding: 1rem;
+}
+
+.rankings-content a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-size: 0.95rem; /* Consistent with index.html subtitles */
+    border: 2px solid var(--accent-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.rankings-content a:hover {
+    background-color: var(--accent-primary);
+    color: white;
+}

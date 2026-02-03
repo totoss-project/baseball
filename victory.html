@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>승리!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="victory.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="game-container">
+            <canvas id="fireworks-canvas"></canvas>
+            <div class="victory-content">
+                <h1>축하합니다. 홈런입니다!</h1>
+                <p>당신의 기록: <span id="record"></span></p>
+                <div class="ranking-form">
+                    <input type="text" id="player-name" placeholder="이름을 입력하세요">
+                    <button id="save-rank">저장</button>
+                </div>
+                <a href="index.html">다시하기</a>
+            </div>
+        </div>
+    </div>
+    <script src="fireworks.js"></script>
+    <script src="victory.js"></script>
+</body>
+</html>

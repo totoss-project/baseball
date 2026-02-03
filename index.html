@@ -99,6 +99,13 @@
             font-size: 0.95rem;
         }
 
+        #timer {
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
         .game-status {
             text-align: center;
             background-color: rgba(255, 255, 255, 0.03);
@@ -396,6 +403,8 @@
             <header>
                 <h1>숫자 야구</h1>
                 <p class="subtitle">겹치지 않는 3자리 숫자 (0-9)를 맞춰보세요</p>
+                <div id="timer" class="subtitle">00:00</div>
+                <p class="subtitle"><a href="rankings.html" style="color: var(--ball-color); text-decoration: none;">랭킹 보기</a></p>
             </header>
 
             <div class="game-status" id="game-status">
@@ -447,6 +456,10 @@
         // Game State
         let secretCode = [];
         let isGameOver = false;
+        let timerInterval = null;
+        let startTime = 0;
+        let elapsedTime = 0;
+        let timerStarted = false;
 
         // DOM Elements
         const guessInput = document.getElementById('guess-input');
@@ -456,8 +469,31 @@
         const gameStatus = document.getElementById('game-status');
         const toast = document.getElementById('toast');
         const eliminatedNumbersContainer = document.getElementById('eliminated-numbers');
+        const timer = document.getElementById('timer');
 
         // Functions
+        function startTimer() {
+            if (timerStarted) return;
+            timerStarted = true;
+            startTime = Date.now() - elapsedTime;
+            timerInterval = setInterval(() => {
+                elapsedTime = Date.now() - startTime;
+                const formattedTime = new Date(elapsedTime).toISOString().substr(14, 5);
+                timer.textContent = formattedTime;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            stopTimer();
+            elapsedTime = 0;
+            timerStarted = false;
+            timer.textContent = "00:00";
+        }
+
         function generateSecretCode() {
             const digits = Array.from({ length: 10 }, (_, i) => i); // [0, 1, ... 9]
             const code = [];
@@ -552,14 +588,14 @@
         }
 
         function endGame(win) {
+            stopTimer();
             isGameOver = true;
             guessInput.disabled = true;
             guessBtn.style.display = 'none';
             restartBtn.style.display = 'block';
 
             if (win) {
-                gameStatus.textContent = "🎉 홈런! 승리했습니다!";
-                gameStatus.classList.add('win');
+                window.location.href = `victory.html?time=${elapsedTime}`;
             } else {
                 gameStatus.textContent = "게임 종료. 정답은 " + secretCode.join('') + "였습니다.";
             }
@@ -567,6 +603,7 @@
 
         function handleGuess() {
             if (isGameOver) return;
+            startTimer();
 
             const val = guessInput.value;
             const validation = isValidGuess(val);
@@ -605,6 +642,7 @@
         }
 
         function initGame() {
+            resetTimer();
             secretCode = generateSecretCode();
             isGameOver = false;
             guessInput.disabled = false;
