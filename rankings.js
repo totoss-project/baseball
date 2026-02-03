@@ -23,9 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
         top10Rankings.forEach((rank, index) => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('ranking-item');
+            
+            let medal = '';
+            if (index === 0) {
+                itemDiv.classList.add('rank-1');
+                medal = '🥇 ';
+            } else if (index === 1) {
+                itemDiv.classList.add('rank-2');
+                medal = '🥈 ';
+            } else if (index === 2) {
+                itemDiv.classList.add('rank-3');
+                medal = '🥉 ';
+            }
+
             const formattedTime = new Date(rank.time).toISOString().substr(14, 5);
             itemDiv.innerHTML = `
-                <span>${index + 1}. ${rank.name}</span>
+                <span>${medal}${index + 1}. ${rank.name}</span>
                 <span>${formattedTime}</span>
             `;
             rankingListDiv.appendChild(itemDiv);

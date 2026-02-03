@@ -66,21 +66,32 @@ body {
     border-radius: 12px;
     font-size: 0.95rem; /* Consistent with index.html subtitles */
     color: var(--text-secondary); /* Consistent with index.html subtitles */
+    transition: all 0.2s ease-in-out; /* Smooth transition for emphasis */
 }
 
-.ranking-item:nth-child(1) {
-    background-color: rgba(255, 215, 0, 0.15); /* Gold for 1st place */
-    color: #ffd700;
+/* Specific styles for top 3 ranks */
+.ranking-item.rank-1 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    background-color: rgba(255, 215, 0, 0.25); /* More prominent gold background */
+    color: #ffd700; /* Gold text */
+    border: 2px solid #ffd700; /* Gold border */
 }
 
-.ranking-item:nth-child(2) {
-    background-color: rgba(192, 192, 192, 0.15); /* Silver for 2nd place */
-    color: #c0c0c0;
+.ranking-item.rank-2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: rgba(192, 192, 192, 0.25); /* More prominent silver background */
+    color: #c0c0c0; /* Silver text */
+    border: 2px solid #c0c0c0; /* Silver border */
 }
 
-.ranking-item:nth-child(3) {
-    background-color: rgba(205, 127, 50, 0.15); /* Bronze for 3rd place */
-    color: #cd7f32;
+.ranking-item.rank-3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    background-color: rgba(205, 127, 50, 0.25); /* More prominent bronze background */
+    color: #cd7f32; /* Bronze text */
+    border: 2px solid #cd7f32; /* Bronze border */
 }
 
 .ranking-item span:first-child {
@@ -91,7 +102,7 @@ body {
 
 .ranking-item span:last-child {
     font-weight: 700;
-    color: var(--accent-primary);
+    color: var(--text-primary); /* Changed to white for better visibility */
 }
 
 .no-rankings {
