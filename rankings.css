@@ -101,9 +101,10 @@ body {
 }
 
 .rankings-content a {
-    color: var(--accent-primary);
+    color: white; /* Changed to white for better visibility */
     text-decoration: none;
-    font-size: 0.95rem; /* Consistent with index.html subtitles */
+    font-size: 1.2rem; /* Increased font size for emphasis */
+    font-weight: 600; /* Bolder text for emphasis */
     border: 2px solid var(--accent-primary);
     padding: 0.5rem 1rem;
     border-radius: 12px;
@@ -112,6 +113,5 @@ body {
 
 .rankings-content a:hover {
     background-color: var(--accent-primary);
-    color: var(--strike-color); /* Emphasized color on hover */
     font-weight: 700; /* Emphasized text on hover */
 }
