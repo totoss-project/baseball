@@ -15,9 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Sort rankings by time (ascending)
         rankings.sort((a, b) => a.time - b.time);
 
+        // Display only the top 10 rankings
+        const top10Rankings = rankings.slice(0, 10);
+
         rankingListDiv.innerHTML = ''; // Clear previous listings
 
-        rankings.forEach((rank, index) => {
+        top10Rankings.forEach((rank, index) => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('ranking-item');
             const formattedTime = new Date(rank.time).toISOString().substr(14, 5);
