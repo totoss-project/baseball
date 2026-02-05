@@ -6,6 +6,7 @@
     <title>숫자 야구 랭킹</title>
     <link rel="stylesheet" href="style.css"> <!-- Reusing global styles for basic vars -->
     <link rel="stylesheet" href="rankings.css">
+    <link rel="stylesheet" href="bgm.css">
 </head>
 <body>
     <div class="page-wrapper">
@@ -25,6 +26,10 @@
             </div>
         </div>
     </div>
+    <audio id="bgm" src="assets/audio/retro-arcade.ogg" loop preload="metadata"></audio>
+    <button id="bgm-toggle" class="bgm-toggle" type="button" aria-pressed="false">BGM OFF</button>
+    <div class="bgm-credit">BGM: "Funky Chiptune (Looping)" by Eric Matyas (soundimage.org) — CC BY 3.0</div>
     <script src="rankings.js"></script>
+    <script src="bgm.js"></script>
 </body>
 </html>
