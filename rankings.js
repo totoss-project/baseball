@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const rankingListDiv = document.getElementById('ranking-list');
+    const top3ListDiv = document.getElementById('top3-list');
+    const restListDiv = document.getElementById('rest-list');
     const noRankingsMessage = document.querySelector('.no-rankings');
 
     function loadAndDisplayRankings() {
@@ -15,33 +16,44 @@ document.addEventListener('DOMContentLoaded', () => {
         // Sort rankings by time (ascending)
         rankings.sort((a, b) => a.time - b.time);
 
-        // Display only the top 10 rankings
-        const top10Rankings = rankings.slice(0, 10);
+        const top3Rankings = rankings.slice(0, 3);
+        const ranks4to10 = rankings.slice(3, 10);
 
-        rankingListDiv.innerHTML = ''; // Clear previous listings
+        top3ListDiv.innerHTML = '';
+        restListDiv.innerHTML = '';
 
-        top10Rankings.forEach((rank, index) => {
+        top3Rankings.forEach((rank, index) => {
             const itemDiv = document.createElement('div');
-            itemDiv.classList.add('ranking-item');
-            
+            const displayRank = index + 1;
+            itemDiv.classList.add('ranking-item', `rank-${displayRank}`);
+
+            const formattedTime = new Date(rank.time).toISOString().substr(14, 5);
             let medal = '';
             if (index === 0) {
-                itemDiv.classList.add('rank-1');
-                medal = '🥇 ';
+                medal = '<span class="medal gold">🥇</span> ';
             } else if (index === 1) {
-                itemDiv.classList.add('rank-2');
-                medal = '🥈 ';
+                medal = '<span class="medal silver">🥈</span> ';
             } else if (index === 2) {
-                itemDiv.classList.add('rank-3');
-                medal = '🥉 ';
+                medal = '<span class="medal bronze">🥉</span> ';
             }
+            itemDiv.innerHTML = `
+                <span>${medal}${displayRank}. ${rank.name}</span>
+                <span>${formattedTime}</span>
+            `;
+            top3ListDiv.appendChild(itemDiv);
+        });
+
+        ranks4to10.forEach((rank, index) => {
+            const itemDiv = document.createElement('div');
+            const displayRank = index + 4;
+            itemDiv.classList.add('ranking-item', `rank-${displayRank}`);
 
             const formattedTime = new Date(rank.time).toISOString().substr(14, 5);
             itemDiv.innerHTML = `
-                <span>${medal}${index + 1}. ${rank.name}</span>
+                <span>${displayRank}. ${rank.name}</span>
                 <span>${formattedTime}</span>
             `;
-            rankingListDiv.appendChild(itemDiv);
+            restListDiv.appendChild(itemDiv);
         });
     }
 

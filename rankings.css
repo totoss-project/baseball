@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-color); /* Use dark background from global style */
@@ -45,15 +46,27 @@ body {
     font-size: 2rem; /* Smaller title size */
     font-weight: 700;
     margin-bottom: 1.5rem;
-    background: linear-gradient(to right, #60a5fa, #a855f7);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: #ffffff;
 }
 
 #ranking-list {
     width: 100%;
     margin-bottom: 2rem;
+}
+
+.rankings-section {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: left;
+    margin: 0 0 0.6rem;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 .ranking-item {
@@ -62,10 +75,11 @@ body {
     align-items: center;
     padding: 0.8rem 1rem;
     margin-bottom: 0.5rem;
-    background-color: var(--input-bg); /* Use a darker background for consistency */
+    background-color: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     font-size: 0.95rem; /* Consistent with index.html subtitles */
-    color: var(--text-primary); /* Use primary text color for visibility */
+    color: #ffffff;
     transition: all 0.2s ease-in-out; /* Smooth transition for emphasis */
 }
 
@@ -73,24 +87,24 @@ body {
 .ranking-item.rank-1 {
     font-size: 1.2rem;
     font-weight: 700;
-    background-color: rgba(255, 215, 0, 0.25); /* More prominent gold background */
-    color: #ffd700; /* Gold text */
+    background-color: rgba(255, 215, 0, 0.2);
+    color: #ffffff;
     border: 2px solid #ffd700; /* Gold border */
 }
 
 .ranking-item.rank-2 {
     font-size: 1.1rem;
     font-weight: 600;
-    background-color: rgba(192, 192, 192, 0.25); /* More prominent silver background */
-    color: #c0c0c0; /* Silver text */
+    background-color: rgba(192, 192, 192, 0.2);
+    color: #ffffff;
     border: 2px solid #c0c0c0; /* Silver border */
 }
 
 .ranking-item.rank-3 {
     font-size: 1.05rem;
     font-weight: 600;
-    background-color: rgba(205, 127, 50, 0.25); /* More prominent bronze background */
-    color: #cd7f32; /* Bronze text */
+    background-color: rgba(205, 127, 50, 0.2);
+    color: #ffffff;
     border: 2px solid #cd7f32; /* Bronze border */
 }
 
@@ -98,15 +112,34 @@ body {
     font-weight: 600;
     flex-grow: 1;
     text-align: left;
+    color: #ffffff;
 }
 
 .ranking-item span:last-child {
     font-weight: 700;
-    color: var(--text-primary); /* Changed to white for better visibility */
+    color: #ffffff;
+}
+
+.medal {
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 1.1em;
+}
+
+.medal.gold {
+    color: #ffd700;
+}
+
+.medal.silver {
+    color: #c0c0c0;
+}
+
+.medal.bronze {
+    color: #cd7f32;
 }
 
 .no-rankings {
-    color: var(--text-primary);
+    color: #ffffff;
     font-size: 0.95rem; /* Consistent with index.html subtitles */
     padding: 1rem;
 }
